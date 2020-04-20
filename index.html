@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
+<html>
+  <head>
+    <title>Teste Fullstack</title>
+  </head>
+<meta charset="utf-8">
+<script src="angular.min.js"></script>
+<script src="app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<script src="Chart.min.js"></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+html {scroll-behavior: smooth;}
 </style>
-<body class="w3-light-grey">
+<body class="w3-light-grey" ng-app="myFirstApp">
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -38,12 +45,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
     <!-- Header -->
-    <header class="w3-container" style="padding-top:22px">
-      <h5><b><i class="fa fa-dashboard"></i> Último quadro atualizado</b></h5>
+    <header class="w3-container" style="padding-top:22px" ng-controller="dateController">
+      <h5><b><i class="fa fa-dashboard"></i> Último quadro atualizado {{timeNow}}</b></h5>
     </header>
 
-    <div class="w3-row-padding w3-margin-bottom">
-        <div class="w3-third">
+    <canvas id="dayChart" width="400" height="200"></canvas>
+
+    <div class="w3-row-padding w3-margin-bottom" ng-controller="dateController">
+        <div class="w3-third" ng-click="getChartData('Temp')">
           <div class="w3-container w3-red w3-padding-16">
             <div class="w3-left"><i class="fas fa-thermometer-half w3-xxxlarge"></i></div>
             <div class="w3-right">
@@ -53,7 +62,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
             <h4>Temperatura</h4>
           </div>
         </div>
-        <div class="w3-third">
+        <div class="w3-third" ng-click="getChartData('Humid')">
           <div class="w3-container w3-blue w3-padding-16">
             <div class="w3-left"><i class="fas fa-cloud-rain w3-xxxlarge"></i></div>
             <div class="w3-right">
@@ -102,7 +111,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                 <div class="w3-clear"></div>
                 <h4>Chuva</h4>
         </div>
-    </div>      
+    </div>
 
    <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-light-grey">
@@ -113,6 +122,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </div>
 
 <script>
+
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 
